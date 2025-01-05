@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="UWPSoundBoard.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPSoundBoard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel>
+            <Button Name="HamburgerButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Content="&#xE700;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"/>
+            <Button Name="BackButton"
+                    RelativePanel.RightOf="HamburgerButton"
+                    Content="&#xE0A6;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"/>
+
+        </RelativePanel>
+
+        <SplitView Name="SoundSplitView"
+                   DisplayMode="CompactOverlay"
+                   CompactPaneLength="45"
+                   OpenPaneLength="200"
+                   Grid.Row="1">
+            <SplitView.Pane>
+                <ListView Name="MenuItemsListView" 
+                          IsItemClickEnabled="True" />
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Name="CategoryTextBlock"
+                               Text="All Sounds"
+                               FontSize="24" />
+                    <GridView Name="SoundGridView"
+                              Grid.Row="1"
+                              IsItemClickEnabled="True">
+                        
+                    </GridView>
+                </Grid>
+            </SplitView.Content>
+            
+        </SplitView>
+    </Grid>
+</Page>
