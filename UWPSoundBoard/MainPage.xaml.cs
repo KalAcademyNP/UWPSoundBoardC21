@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWPSoundBoard.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +24,48 @@ namespace UWPSoundBoard
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ObservableCollection<Sound> sounds;
+        private List<MenuItem> menuItems;
         public MainPage()
         {
             this.InitializeComponent();
+            this.sounds = new ObservableCollection<Sound>();
+            SoundManager.GetAllSounds(sounds);
+            menuItems = new List<MenuItem>
+            {
+                new MenuItem
+                {
+                    IconFile="Assets/Icons/animals.png",
+                    Category = SoundCategory.Animals
+                },
+                new MenuItem
+                {
+                    IconFile="Assets/Icons/cartoon.png",
+                    Category = SoundCategory.Cartoons
+                },
+                new MenuItem
+                {
+                    IconFile="Assets/Icons/taunt.png",
+                    Category = SoundCategory.Taunts
+                },
+                new MenuItem
+                {
+                    IconFile="Assets/Icons/warning.png",
+                    Category = SoundCategory.Warnings
+                }
+            };
+        }
+
+        private void SoundGridView_ItemClick(object sender, 
+            ItemClickEventArgs e)
+        {
+            var sound = (Sound)e.ClickedItem;
+            SoundMedia.Source = new Uri(this.BaseUri, sound.AudioFile);
+        }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SoundSplitView.IsPaneOpen = !SoundSplitView.IsPaneOpen;
         }
     }
 }

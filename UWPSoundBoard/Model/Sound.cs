@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace UWPSoundBoard.Model
 {
-    internal enum SoundCategory
+    public enum SoundCategory
     {
         Animals,
         Cartoons,
         Taunts,
         Warnings
     }
-    internal class Sound
+    public class Sound
     {
         public string Name { get; set; }
         public SoundCategory SoundCategory { get; set; }
