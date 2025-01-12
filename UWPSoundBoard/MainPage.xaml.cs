@@ -54,6 +54,7 @@ namespace UWPSoundBoard
                     Category = SoundCategory.Warnings
                 }
             };
+            BackButton.Visibility = Visibility.Collapsed;
         }
 
         private void SoundGridView_ItemClick(object sender, 
@@ -66,6 +67,23 @@ namespace UWPSoundBoard
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             SoundSplitView.IsPaneOpen = !SoundSplitView.IsPaneOpen;
+        }
+
+        private void MenuItemsListView_ItemClick(object sender, 
+            ItemClickEventArgs e)
+        {
+            var menuItem = (MenuItem)e.ClickedItem;
+            SoundManager.GetSoundsByCategory(sounds, menuItem.Category);
+            CategoryTextBlock.Text = menuItem.Category.ToString();
+            BackButton.Visibility = Visibility.Visible;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            SoundManager.GetAllSounds(sounds);
+            CategoryTextBlock.Text = "All Sounds";
+            MenuItemsListView.SelectedItem = null;
+            BackButton.Visibility = Visibility.Collapsed;
         }
     }
 }

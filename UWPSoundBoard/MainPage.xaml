@@ -28,7 +28,9 @@
                     Content="&#xE0A6;"
                     FontFamily="Segoe MDL2 Assets"
                     Height="45"
-                    Width="45"/>
+                    Width="45"
+                    Click="BackButton_Click"
+                    />
 
         </RelativePanel>
 
@@ -41,6 +43,7 @@
                 <ListView Name="MenuItemsListView" 
                           IsItemClickEnabled="True"
                           ItemsSource="{x:Bind menuItems}"
+                          ItemClick="MenuItemsListView_ItemClick"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="data:MenuItem">
@@ -56,7 +59,7 @@
                 </ListView>
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid>
+                <Grid Margin="10,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
